@@ -90,7 +90,7 @@ struct ContentView: View {
                         .scaledToFit()
                         .frame(width: geo.size.width)
                         .scaleEffect(isZoomed ? 2.0 : 1.0)
-                        .offset(offset)
+                        .offset(x: offset.width, y: offset.height + (isZoomed ? 20 : 0))
                         .onTapGesture {
                             withAnimation {
                                 if isZoomed {
@@ -140,6 +140,14 @@ struct ContentView: View {
             }
         }
         .padding()
+        .overlay(alignment: .top) {
+            if isZoomed {
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(height: 20)
+                    .edgesIgnoringSafeArea(.top)
+            }
+        }
     }
 }
 
